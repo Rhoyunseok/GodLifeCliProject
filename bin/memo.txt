@@ -1,0 +1,3 @@
+윤석
+- 에뮬/디바이스 연결 adb devices
+- 실행 npx react-native run-android
