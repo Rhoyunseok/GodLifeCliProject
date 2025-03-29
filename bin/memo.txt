@@ -1,3 +1,7 @@
+현재 branch 확인 => git branch
+branch 생성 => git branch 명명
+branch 이동 => git checkout 해당브랜치이름
+
 윤석
 - 에뮬/디바이스 연결 adb devices
 - 실행 npx react-native run-android
