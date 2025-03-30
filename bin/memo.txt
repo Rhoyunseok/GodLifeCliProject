@@ -5,3 +5,15 @@ branch 이동 => git checkout 해당브랜치이름
 윤석
 - 에뮬/디바이스 연결 adb devices
 - 실행 npx react-native run-android
+
+
+용희
+디바이스 실행
+- npm install --save-dev @react-native-community/cli 
+- npm run android
+
+webview 연동
+- npm install react-native-webview
+
+geolocation설치 
+- npm install @react-native-community/geolocation   
