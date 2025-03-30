@@ -7,6 +7,7 @@ import {
   StyleSheet,
   SafeAreaView,
   NativeModules,
+  Image,
 } from 'react-native';
 
 const {InstalledApps} = NativeModules;
@@ -14,6 +15,7 @@ const {InstalledApps} = NativeModules;
 type AppInfo = {
   label: string;
   packageName: string;
+  icon: string;
   enabled: boolean;
 };
 
@@ -25,7 +27,7 @@ const App = () => {
       .then((result: any[]) => {
         const appList: AppInfo[] = result.map(app => ({
           ...app,
-          enabled: false, // 기본은 제한 안함
+          enabled: false,
         }));
         setApps(appList);
       })
@@ -44,6 +46,10 @@ const App = () => {
 
   const renderItem = ({item}: {item: AppInfo}) => (
     <View style={styles.item}>
+      <Image
+        source={{uri: `data:image/png;base64,${item.icon}`}}
+        style={styles.icon}
+      />
       <Text style={styles.label}>{item.label}</Text>
       <Switch
         value={item.enabled}
@@ -70,6 +76,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 16,
     paddingHorizontal: 16,
+    backgroundColor: '#fff',
   },
   title: {
     fontSize: 22,
@@ -78,17 +85,22 @@ const styles = StyleSheet.create({
   },
   item: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 12,
+    paddingVertical: 10,
+  },
+  icon: {
+    width: 40,
+    height: 40,
+    borderRadius: 8,
+    marginRight: 12,
   },
   label: {
-    fontSize: 16,
     flex: 1,
+    fontSize: 16,
   },
   separator: {
     height: 1,
-    backgroundColor: '#ccc',
+    backgroundColor: '#eee',
   },
 });
 
