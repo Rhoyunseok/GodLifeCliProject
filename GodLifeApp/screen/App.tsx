@@ -8,9 +8,10 @@ import {
   SafeAreaView,
   NativeModules,
   Image,
+  Button,
 } from 'react-native';
 
-const {InstalledApps} = NativeModules;
+const {InstalledApps, BlockList, AccessibilityHelper} = NativeModules;
 
 type AppInfo = {
   label: string;
@@ -22,6 +23,7 @@ type AppInfo = {
 const App = () => {
   const [apps, setApps] = useState<AppInfo[]>([]);
 
+  // 앱 목록 불러오기
   useEffect(() => {
     InstalledApps.getInstalledApps()
       .then((result: any[]) => {
@@ -36,6 +38,7 @@ const App = () => {
       });
   }, []);
 
+  // 앱 토글 처리
   const toggleApp = (packageName: string) => {
     setApps(prev =>
       prev.map(app =>
@@ -44,6 +47,20 @@ const App = () => {
     );
   };
 
+  // 차단 앱 저장 (Native로 전달)
+  const saveBlockedApps = () => {
+    const blocked = apps.filter(app => app.enabled).map(app => app.packageName);
+
+    BlockList.setBlockedApps(blocked);
+    console.log('차단 앱 저장됨:', blocked);
+  };
+
+  // 접근성 설정 화면 열기
+  const goToAccessibilitySettings = () => {
+    AccessibilityHelper.openAccessibilitySettings();
+  };
+
+  // 앱 리스트 아이템 렌더링
   const renderItem = ({item}: {item: AppInfo}) => (
     <View style={styles.item}>
       <Image
@@ -60,12 +77,18 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>설치된 앱 목록</Text>
+      <Text style={styles.title}>앱 제한 설정</Text>
       <FlatList
         data={apps}
         keyExtractor={item => item.packageName}
         renderItem={renderItem}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
+      />
+      <Button title="차단 앱 저장" onPress={saveBlockedApps} />
+      <View style={{marginVertical: 10}} />
+      <Button
+        title="접근성 권한 설정 열기"
+        onPress={goToAccessibilitySettings}
       />
     </SafeAreaView>
   );

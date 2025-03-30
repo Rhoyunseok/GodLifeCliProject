@@ -20,6 +20,8 @@ class MainApplication : Application(), ReactApplication {
         PackageList(this).packages.apply {
           // 기존에 있는 패키지 목록에 Native 모듈을 수동 등록
           add(InstalledAppsPackage())
+          add(BlockListPackage())
+          add(AccessibilityHelperPackage())
         }
 
       override fun getJSMainModuleName(): String = "index"
