@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "255751315422",
+    "project_id": "godlifeapp",
+    "storage_bucket": "godlifeapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:255751315422:android:af8be17267d12f0b8c474f",
+        "android_client_info": {
+          "package_name": "com.godlifeapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnWQQmtvvOvRZejXVxMH0xRgwwOX7Lyjw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
