@@ -1,14 +1,21 @@
 // src/screens/SignUpScreen.js
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebase'; // 경로는 상황에 맞게 조정
 
 export default function SignUpScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onSignUp = () => {
-    // Firebase 회원가입 연동 예정
-    console.log('회원가입 시도:', email, password);
+  const onSignUp = async () => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      console.log('회원가입 성공');
+      navigation.replace("Login");
+    } catch (error: any) {
+      console.log("회원가입 실패:", error.message);
+    }
   };
 
   return (

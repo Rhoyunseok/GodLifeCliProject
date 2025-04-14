@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AuthStackParamList } from '../navigation/AuthStack';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebase';
+
+
+
 
 type Props = NativeStackScreenProps<AuthStackParamList, 'Login'>;
 
@@ -9,8 +14,14 @@ export default function LoginScreen({ navigation }: Props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onLogin = () => {
-    console.log('로그인 시도:', email, password);
+  const onLogin = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      console.log('로그인 성공');
+      //navigation.replace("Home");
+    } catch (error: any) {
+      console.log("로그인 실패:", error.message);
+    }
   };
 
   return (
